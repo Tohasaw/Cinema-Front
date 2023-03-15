@@ -64,6 +64,7 @@
       <div v-if="errorif" class="maxtickets">{{errortext}}</div>
       <div class="img"><img src='../assets/display.png' alt=""/></div>
       <div class="seats" v-if="!showPurchase">
+        <!-- Места в зале -->
         <div v-for="row in 8" :key="row" class="row">
           <div class="column left">
             <div class="rownumleft">{{row}}</div>
@@ -144,6 +145,7 @@
             <div class="rownumrightlast">17</div>
           </div>
         </div>
+        <!-- Места в зале -->
       </div>
     </div>
     <div class="modal-footer">
@@ -191,7 +193,8 @@ export default {
       tickets: [],
       ticketsToBuy: [],
       classObject: [],
-      col: Array.from({ length: 31 }, (_, i) => i + 1),
+      col: Array.from({ length: 31 }, (_, i) => i + 1),  // Количество колонок в зале
+      rows: Array.from({ length: 31 }, (_, i) => i + 1), // Количество мест в зале
       show: false,
       showPurchase: false,
       description: '',

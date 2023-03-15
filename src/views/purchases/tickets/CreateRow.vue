@@ -23,6 +23,7 @@
         <div v-if="errorif" class="maxtickets">{{errortext}}</div>
         <div class="img"><img src='../../../assets/display.png' alt=""/></div>
         <div class="seats">
+          <!-- Места в зале -->
           <div v-for="row in 8" :key="row" class="row">
             <div class="column left">
               <div class="rownumleft">{{row}}</div>
@@ -103,6 +104,7 @@
               <div class="rownumright">17</div>
             </div>
           </div>
+          <!-- Места в зале -->
         </div>
       </div>
     </div>
@@ -116,6 +118,7 @@ export default {
   data() {
     return {
       col: Array.from({ length: 31 }, (_, i) => i + 1),
+      rows: Array.from({ length: 12 }, (_, i) => i + 1),
       name: '',
       ticketCurrent: '',
       ticket: {

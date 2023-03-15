@@ -19,20 +19,6 @@ import AboutPage from '../views/About.vue';
 import HeaderMain from '../headers/main-header.vue';
 import HeaderAdmin from '../headers/admin-header.vue';
 import PurchaseInfo from '../views/PurchaseInfo.vue';
-// import SigninPage from '../views/Signin.vue';
-
-// const isAuthorized = Object.prototype.hasOwnProperty.call(localStorage, 'token');
-
-// const authGuard = function (to, from, next) {
-//   if (!isAuthorized) next('/login');
-//   else next();
-// };
-
-// const managerAuthGuard = function (to, from, next) {
-//   if (!isAuthorized) next({ name: 'Login' });
-//   else if (localStorage.getItem('userRole') !== 'admin') next({ name: 'Home' });
-//   else next();
-// };
 
 export default createRouter({
   history: createWebHistory(),
