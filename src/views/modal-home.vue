@@ -3,17 +3,17 @@
         <div class="modal">
             <div class="modal-close" @click="closeModal">&#10006;</div>
             <slot name="title">
-                <h3 class="modal-title">Удаление записи</h3>
+                <h3 class="modal-title">{{ title }}</h3>
             </slot>
             <slot name="body">
                 <div class="modal-content">
-                  <p>Вы точно уверены?</p>
+                  <p>{{ description }}</p>
                 </div>
             </slot>
             <slot name="footer">
                 <div class="modal-footer">
-                    <button class="modal-footer__button" @click="deleteData" >
-                        Удалить
+                    <button class="modal-footer__button" @click="closeModal">
+                        Ок
                     </button>
                 </div>
             </slot>
@@ -26,18 +26,12 @@ export default {
   name: 'ModalWindow',
   data() {
     return {
+      title: 'title',
+      description: 'description',
       show: false,
-      name: '',
-      id: '',
     };
   },
   methods: {
-    deleteData() {
-      let id = this.id;
-      let name = this.name;
-      this.$store.dispatch('entities/deleteData', { name, id });
-      this.show = false;
-    },
     closeModal() {
       this.show = false;
     }
@@ -61,6 +55,7 @@ export default {
       left: 0;
       min-height: 100%;
       width: 100%;
+      z-index: 3;
       background: rgba(0, 0, 0, 0.39);
     }
 
@@ -76,7 +71,7 @@ export default {
       transform: translate(-50%, -50%);
     }
     .modal-close {
-      color:black;
+      color: black;
       margin-bottom: 10px;
       cursor:pointer;
     }

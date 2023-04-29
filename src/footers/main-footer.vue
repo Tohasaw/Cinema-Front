@@ -1,6 +1,5 @@
 <template>
   <div class="main-footer">
-    <div class="back-footer"></div>
     <div class="content-footer">
       <div class="partleft">
         <div class="title">
@@ -35,7 +34,9 @@ export default {
 <style scoped>
   /* @import url('https://fonts.googleapis.com/css2?family=Ruslan+Display&display=swap'); */
 .main-footer {
-  position: relative;
+  margin-top: auto;
+  background: radial-gradient(143.3% 121.6% at 50% 0%, #586CA9 0%, rgba(88, 108, 169, 0) 100%), radial-gradient(47.29% 123.87% at 106.91% 100%, rgba(0, 255, 163, 0.27) 0%, rgba(0, 255, 163, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */, radial-gradient(26.54% 97.11% at 13.05% 82.31%, rgba(78, 49, 255, 0.45) 0%, rgba(93, 106, 216, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */, radial-gradient(34.9% 87.93% at 50% 129.59%, rgba(255, 148, 148, 0.46) 0%, rgba(255, 134, 134, 0) 100%);
+  filter: drop-shadow(0px 13px 17px rgba(0, 0, 0, 0.28));
 }
 .text {
   line-height: 150%;
@@ -52,15 +53,8 @@ export default {
 }
 
 @media only screen and (min-width: 1180px) {
-  .back-footer {
-    z-index: 0;
-    position: absolute;
-    width: 1200px;
-    height: 300px;
-    left: -10px;
-    top: 0px;
-    background: radial-gradient(143.3% 121.6% at 50% 0%, #586CA9 0%, rgba(88, 108, 169, 0) 100%), radial-gradient(47.29% 123.87% at 106.91% 100%, rgba(0, 255, 163, 0.27) 0%, rgba(0, 255, 163, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */, radial-gradient(26.54% 97.11% at 13.05% 82.31%, rgba(78, 49, 255, 0.45) 0%, rgba(93, 106, 216, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */, radial-gradient(34.9% 87.93% at 50% 129.59%, rgba(255, 148, 148, 0.46) 0%, rgba(255, 134, 134, 0) 100%);
-    filter: drop-shadow(0px 13px 17px rgba(0, 0, 0, 0.28));
+  .main-footer {
+    width: 1180px;
   }
   .title {
   margin-bottom: 30px;
@@ -76,13 +70,8 @@ export default {
   }
 }
 @media only screen and (max-width: 1180px) {
-  .back-footer {
-    z-index: 0;
-    position: absolute;
-    width: 100%;
-    height: 300px;
-    background: radial-gradient(143.3% 121.6% at 50% 0%, #586CA9 0%, rgba(88, 108, 169, 0) 100%), radial-gradient(47.29% 123.87% at 106.91% 100%, rgba(0, 255, 163, 0.27) 0%, rgba(0, 255, 163, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */, radial-gradient(26.54% 97.11% at 13.05% 82.31%, rgba(78, 49, 255, 0.45) 0%, rgba(93, 106, 216, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */, radial-gradient(34.9% 87.93% at 50% 129.59%, rgba(255, 148, 148, 0.46) 0%, rgba(255, 134, 134, 0) 100%);
-    filter: drop-shadow(0px 13px 17px rgba(0, 0, 0, 0.28));
+  .main-footer {
+    min-width: 100vw;
   }
   .title {
     margin-bottom: 30px;

@@ -41,6 +41,7 @@ export default {
 <style scoped
        lang="scss">
     h3 {
+      color: black;
       font-family: 'Inter';
     }
     p {
@@ -68,6 +69,7 @@ export default {
       transform: translate(-50%, -50%);
     }
     .modal-close {
+      color: black;
       margin-bottom: 10px;
       cursor:pointer;
     }

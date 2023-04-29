@@ -22,7 +22,7 @@
           <p>Возраст: </p> <input v-model="currentMovie.ageLimit" placeholder="" />
         </div>
         <div class="line">
-          <p>Описание:</p> <input v-model="currentMovie.description" placeholder="" />
+          <p>Описание:</p> <textarea cols="50" rows="10" class="" v-model="currentMovie.description" placeholder=""></textarea>
         </div>
         <div class="line">
           <p>Ссылка на видео:</p> <input v-model="currentMovie.videoLink" placeholder="" />
@@ -156,16 +156,18 @@ export default {
 
 }
 .back {
+  position: relative;
   display: flex;
   padding-top: 20px;
   padding-bottom: 20px;
   margin-top: 20px;
   width: 100%;
-  background: linear-gradient(90deg, rgba(193, 189, 189, 0.4) 0%, rgba(85, 85, 85, 0.6) 100%);
+  background: rgba(255, 255, 255, 0.116);
   border-radius: 8px;
 }
 .albumshow {
-  margin-left: 450px;
+  position: absolute;
+  right: 5%;
 }
 .uploading-image {
   border: solid black;
@@ -175,7 +177,7 @@ export default {
 .album {
   display: flex;
   margin-bottom: 10px;
-  width: 400px;
+  width: 500px;
 }
 .album > p {
   display: inline-block;
@@ -186,6 +188,10 @@ export default {
 }
 .line {
   margin-bottom: 10px;
+}
+.description {
+  width: 100px;
+  height: 40px;
 }
 .line > p {
   display: inline-block;

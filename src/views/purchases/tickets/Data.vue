@@ -18,11 +18,10 @@
             <div class="dropdown-content">
               <a @click="maxItems = 10" href="#">10</a>
               <a @click="maxItems = 20" href="#">20</a>
-              <a @click="maxItems = 50" href="#">50</a>
             </div>
           </div>
           <div class="button-create el" @click="createData()">
-            Создать <svg-icon type="mdi" :path="plus" color="#5E7CE7"></svg-icon>
+            Создать <svg-icon class="svg" type="mdi" :path="plus" color="#5E7CE7"></svg-icon>
           </div>
         </div>
       </div>
@@ -125,17 +124,8 @@ export default {
   async created() {
     const name = this.entityName;
     await this.$store.dispatch('entities/getDataById', { name, id: this.id });
-    await this.$store.dispatch('main/getSeats');
-    await this.$store.dispatch('entities/getPurchase', { id: this.id })
-      .then(() => {
-        let unsubscribe = this.$store.subscribe((mutation) => {
-          if (mutation.type === 'entities/updatePurchase') {
-            this.$store.dispatch('main/getSeatPrices', this.purchase.tableEntry.id);
-            this.$store.dispatch('main/getPricesForList', this.purchase.tableEntry.priceListId);
-          }
-          unsubscribe();
-        });
-      });
+    // await this.$store.dispatch('main/getSeats');
+    await this.$store.dispatch('entities/getPurchase', { id: this.id });
   },
   watch: {
     rows() {
@@ -169,7 +159,9 @@ export default {
       this.$refs.modalInfo.description = data.description;
       this.$refs.modalInfo.show = true;
     },
-    createData() {
+    async createData() {
+      await this.$store.dispatch('main/getSeatPrices', this.purchase.tableEntry.id);
+      await this.$store.dispatch('main/getPricesForList', this.purchase.tableEntry.priceListId);
       this.editshow = true;
       window.scrollTo({
         top: 103,
@@ -334,57 +326,12 @@ table {
 .el {
   width: 45%;
 }
-.button-create {
-  border-radius: 20px;
-  margin-left: 10%;
-  height: 40px;
-  text-align: center;
-}
 .bottom {
   display: flex;
   margin: auto;
   font-family: 'Inter';
   font-size: 20px;
-  height: 10px;
+  height: 50px;
   width: 100px;
-}
-.button-dropdown {
-  display: inline;
-}
-.dropbtn {
-  border-radius: 20px;
-  position: relative;
-  width: 100%;
-  height: 40px;
-  color: #5E7CE7;
-  font-size: 16px;
-  font-weight: bold;
-  border: none;
-}
-.dropdown-content {
-  position: relative;
-  font-size: 16px;
-  display: none;
-  margin-left: 0;
-  margin-right: 0;
-  background-color: #f1f1f1;
-
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 3;
-}
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-.show-modal-button {
-  height: 10px;
-}
-.dropdown-content a:hover {background-color: #ddd;}
-.button-dropdown:hover .dropdown-content {display: block;}
-.button-dropdown:hover .dropbtn {
-  background-color: #5E7CE7;
-  color: white;
 }
 </style>

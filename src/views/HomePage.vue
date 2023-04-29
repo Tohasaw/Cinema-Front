@@ -1,6 +1,7 @@
 <template>
   <div class="content">
-    <modal-ticket id="window" ref="modalTicket"></modal-ticket>
+    <modal-home id="window" ref="modalHome"></modal-home>
+    <modal-ticket id="window" ref="modalTicket" @ticketbought="showTicketBought"></modal-ticket>
     <div class="main-container">
       <div class="nav-menu std">
         <router-link id="title" :to="{name: 'Home'}" class="nav-menu-button enabled">Главная</router-link>
@@ -54,6 +55,7 @@ import {
   mdiPlusBox,
 } from '@mdi/js';
 import ModalTicket from './TicketModal.vue';
+import ModalHome from './modal-home.vue';
 import MainFooter from '../footers/main-footer.vue';
 
 let somedate = {
@@ -64,6 +66,11 @@ let somedate = {
 };
 export default {
   name: 'HomePage',
+  components: {
+    MainFooter,
+    ModalTicket,
+    ModalHome,
+  },
   data() {
     return {
       pos: {
@@ -90,10 +97,6 @@ export default {
         { somedate },
       ],
     };
-  },
-  components: {
-    MainFooter,
-    ModalTicket,
   },
   async created() {
     await this.$store.dispatch('main/getMovies');
@@ -129,19 +132,27 @@ export default {
         }
         if (movies[i].tableEntries.length === 0) movies.splice(i, 1);
       }
-      return movies;
+      return movies.sort((a, b) => {
+        let aTime = this.getMostUrgentTime(a.tableEntries);
+        let bTime = this.getMostUrgentTime(b.tableEntries);
+        return aTime - bTime;
+      });
     }
   },
   methods: {
     async showModalTicket(movie, entry) {
-      let data = JSON.parse(JSON.stringify(entry));
-      // delete data.movie;
-      await this.$store.dispatch('main/getSeatPrices', data.id);
-      await this.$store.dispatch('main/getSeats');
-      await this.$store.dispatch('main/getPricesForList', data.priceListId);
-      this.$refs.modalTicket.tableEntry = entry;
-      this.$refs.modalTicket.movie = movie;
-      this.$refs.modalTicket.show = true;
+      if (new Date(Date.parse(entry.dateTime)) < new Date()) {
+        this.$refs.modalHome.description = 'Купить билет на сеанс можно только за 30 минут до начала.';
+        this.$refs.modalHome.title = 'Внимание';
+        this.$refs.modalHome.show = true;
+      } else {
+        let data = JSON.parse(JSON.stringify(entry));
+        await this.$store.dispatch('main/getSeatPrices', data.id);
+        await this.$store.dispatch('main/getPricesForList', data.priceListId);
+        this.$refs.modalTicket.tableEntry = entry;
+        this.$refs.modalTicket.movie = movie;
+        this.$refs.modalTicket.show = true;
+      }
     },
     datesort(date, index) {
       this.isEnabled = [0, 0, 0, 0, 0, 0, 0];
@@ -155,6 +166,11 @@ export default {
     },
     onResize() {
       this.windowWidth = window.innerWidth;
+    },
+    showTicketBought() {
+      this.$refs.modalHome.description = 'Билеты отправлены на указанный вами адрес почты.';
+      this.$refs.modalHome.title = 'Спасибо за покупку!';
+      this.$refs.modalHome.show = true;
     },
     mouseMoveHandler(e) {
       // How far the mouse has been moved
@@ -186,7 +202,12 @@ export default {
 
       document.addEventListener('mousemove', this.mouseMoveHandler);
       document.addEventListener('mouseup', this.mouseUpHandler);
-    }
+    },
+    getMostUrgentTime(tableEntries) {
+      let timeArray = tableEntries.map((entry) => new Date(entry.dateTime).getTime());
+      let mostUrgentItem = Math.min(...timeArray);
+      return new Date(mostUrgentItem).getTime();
+    },
   },
 };
 </script>
@@ -291,6 +312,7 @@ export default {
     margin-right: auto;
     display: block;
     width: 1180px;
+    min-height: 100vh;
     background: rgba(0, 0, 0, 0.36);
     box-shadow: 0px 5px 56px rgba(0, 0, 0, 0.35);
   }
@@ -392,6 +414,7 @@ export default {
     margin-right: auto;
     display: block;
     width: 100%;
+    min-height: 100vh;
     background: rgba(0, 0, 0, 0.36);
     box-shadow: 0px 5px 56px rgba(0, 0, 0, 0.35);
   }
@@ -428,6 +451,8 @@ export default {
     box-sizing: border-box;
     margin: auto;
     text-align: center;
+    margin-top: 6em;
+    margin-bottom: 6em;
   }
   .nofilms img{
     width: 10em;
@@ -466,7 +491,7 @@ export default {
   .note {
     text-align: justify;
     margin: 1em;
-    font-size: 1em;
+    font-size: 0.8em;
   }
   .about {
     z-index: 2;

@@ -8,7 +8,7 @@
           <select v-model="selectedEntryComp">
             <option v-for="entry in entries" :value="entry" :key="entry.id">{{entry.movie.title}} {{ new Date(Date.parse(entry.dateTime)).toLocaleString() }}</option>
           </select><br>
-          <p>Дата</p>{{ new Date(Date.parse(currentRow.dateTime)).toLocaleString() }}<br>
+          <!-- <p>Дата</p>{{ new Date(Date.parse(currentRow.dateTime)).toLocaleString() }}<br> -->
           <p>Телефон</p>
           <input v-model="currentRow.phoneNumber" placeholder=""/><br>
           <p>Сумма</p>{{ currentRow.priceTotal }}<br>
@@ -115,9 +115,12 @@ export default {
 }
 .back {
   display: flex;
-  padding: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   margin-top: 20px;
-  width: 1001px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.116);
+  border-radius: 8px;
 }
 .albumshow {
   margin-left: 350px;

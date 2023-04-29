@@ -89,9 +89,12 @@ export default {
 }
 .back {
   display: flex;
-  padding: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   margin-top: 20px;
-  width: 1001px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.116);
+  border-radius: 8px;
 }
 .albumshow {
   margin-left: 350px;

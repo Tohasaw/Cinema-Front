@@ -34,6 +34,7 @@ export default {
     tickets: null,
     purchases: null,
     purchase: null,
+    pages: null,
   },
   mutations: {
     updateEntries(state, entries) {
@@ -66,11 +67,21 @@ export default {
     updateTickets(state, tickets) {
       state.tickets = tickets;
     },
+    updatePages(state, pages) {
+      state.pages = pages;
+    },
   },
   actions: {
     getData({ commit }, name) {
       axios.get(`/api/${name}`)
-        .then((result) => commit(`update${name}`, result.data.sort((a, b) => b.id - a.id)));
+        .then((result) => commit(`update${name}`, result.data));
+    },
+    getDataPaged({ commit }, { name, pageSize, pageNumber }) {
+      axios.get(`/api/${name}?pageSize=${pageSize}&pageNumber=${pageNumber}`)
+        .then((result) => {
+          commit(`update${name}`, result.data);
+          commit('updatePages', parseInt(result.headers['pagecount']));
+        });
     },
     postData({ commit }, { data, name }) {
       axios.post(`/api/${name}`, data)

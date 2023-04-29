@@ -122,6 +122,7 @@ export default {
     margin-right: auto;
     display: block;
     width: 1180px;
+    min-height: 100vh;
     background: rgba(0, 0, 0, 0.36);
     box-shadow: 0px 5px 56px rgba(0, 0, 0, 0.35);
   }
@@ -236,6 +237,7 @@ export default {
     margin-right: auto;
     display: block;
     width: 100%;
+    min-height: 100vh;
     background: rgba(0, 0, 0, 0.36);
     box-shadow: 0px 5px 56px rgba(0, 0, 0, 0.35);
   }

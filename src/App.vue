@@ -8,7 +8,7 @@
     <router-view/>
   </main>
   <footer>
-    Сайт нашкодил шпагето, 2023г.
+    Сайт использует бесплатное full-stack приложение. Доступ к репозитериям: https://github.com/Tohasaw
   </footer>
 </body>
 </template>
@@ -19,6 +19,9 @@ export default {
 };
 </script>
 <style>
+footer {
+  text-align: center;
+}
 .content {
   margin: auto;
   display: flex;
@@ -56,6 +59,65 @@ main {
   box-sizing: border-box;
   background: rgba(0, 0, 0, 0.36);
   box-shadow: 0px 5px 56px rgba(0, 0, 0, 0.35);
+}
+.button-create {
+  position: relative;
+  border-radius: 20px;
+  margin-left: 10%;
+  height: 40px;
+  padding-left: 20px;
+  padding-top: 6px;
+  box-sizing: border-box;
+}
+.button-create:hover {background-color: #5E7CE7;}
+.svg {
+  margin-left: 10px;
+  color: #5E7CE7;
+  position: absolute;
+  top: 15%;
+}
+.button-create:hover svg {
+  color: white;
+}
+.button-dropdown {
+  display: inline;
+}
+.dropbtn {
+  font-family: 'Inter';
+  border-radius: 20px;
+  position: relative;
+  width: 100%;
+  height: 40px;
+  color: #5E7CE7;
+  font-size: 20px;
+  border: none;
+  font-weight: 0;
+}
+.dropdown-content {
+  position: relative;
+  font-size: 16px;
+  display: none;
+  margin-left: 0;
+  margin-right: 0;
+  background-color: #f1f1f1;
+
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 3;
+}
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+.show-modal-button {
+  height: 10px;
+}
+.dropdown-content a:hover {background-color: #ddd;}
+.button-dropdown:hover .dropdown-content {display: block;}
+.button-dropdown:hover .dropbtn {
+  background-color: #5E7CE7;
+  color: white;
 }
 @media only screen and (min-width: 1180px) {
   .admin-container {

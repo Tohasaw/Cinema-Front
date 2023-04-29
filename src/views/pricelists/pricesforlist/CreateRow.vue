@@ -4,9 +4,9 @@
     <div class="back">
       <div class="labels">
         <div class="line">
-          <p>Фильм:</p>
+          <p>Цена:</p>
           <select v-model="selectedRowComp">
-            <option v-for="price in prices" :value="price" :key="price.id">{{price.hexColor}} {{ price.value }}</option>
+            <option v-for="price in prices" :value="price" :key="price.id" :style="{color: price.hexColor}"> {{ price.value }}</option>
           </select>
         </div>
         <div class="errors" v-if="errors.length > 0">
@@ -109,9 +109,12 @@ export default {
 }
 .back {
   display: flex;
-  padding: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   margin-top: 20px;
-  width: 1001px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.116);
+  border-radius: 8px;
 }
 .albumshow {
   margin-left: 350px;

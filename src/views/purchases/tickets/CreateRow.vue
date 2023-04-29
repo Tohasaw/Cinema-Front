@@ -270,7 +270,7 @@ export default {
   width: 100%;
   display: flex;
   margin-top: 20px;
-  background: linear-gradient(90deg, rgba(193, 189, 189, 0.4) 0%, rgba(85, 85, 85, 0.6) 100%);
+  background: rgba(255, 255, 255, 0.116);
 }
 .labels {
   margin-left: 20px;

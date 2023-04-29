@@ -161,10 +161,6 @@
 </template>
 
 <script>
-// import SvgIcon from '@jamescoyle/vue-icon';
-// import {
-//   mdiPlusBox,
-// } from '@mdi/js';
 
 export default {
   name: 'ModalWindow',
@@ -193,7 +189,7 @@ export default {
       tickets: [],
       ticketsToBuy: [],
       classObject: [],
-      col: Array.from({ length: 31 }, (_, i) => i + 1),  // Количество колонок в зале
+      col: Array.from({ length: 31 }, (_, i) => i + 1), // Количество колонок в зале
       rows: Array.from({ length: 31 }, (_, i) => i + 1), // Количество мест в зале
       show: false,
       showPurchase: false,
@@ -237,19 +233,6 @@ export default {
         return { 'background-color': seatPrice.price.hexColor };
       }
       return {};
-    },
-    closeModal() {
-      this.errorif = false;
-      this.show = false;
-      this.showPurchase = false;
-      this.ticketsToBuy = [];
-      this.tickets = [];
-      this.purchase = {
-        emailAddress: '',
-        phoneNumber: ''
-      };
-      checkedPers = false;
-      checkedEmail = false;
     },
     togglePurchase() {
       if (this.tickets.length === 0) {
@@ -310,16 +293,27 @@ export default {
                 seatIds: this.ticketsToBuy
               };
               this.$store.dispatch('main/postTickets', { data, router: this.$router });
+              this.$emit('ticketbought');
+              this.closeModal();
             }
           }
         }
       }
       //   let data = this.ticketsToBuy;
       //   this.$store.dispatch('main/postTickets', { data, router: this.$router });
-      //   this.show = false;
-      //   this.ticketsToBuy = [];
-      //   this.tickets = [];
-      //   this.closeModal();
+    },
+    closeModal() {
+      this.errorif = false;
+      this.show = false;
+      this.showPurchase = false;
+      this.ticketsToBuy = [];
+      this.tickets = [];
+      this.purchase = {
+        emailAddress: '',
+        phoneNumber: ''
+      };
+      checkedPers = false;
+      checkedEmail = false;
     },
     priceTotal() {
       let initialValue = 0;
@@ -348,9 +342,6 @@ export default {
     },
     seatPrices() {
       return this.$store.state.main.seatPrices;
-    },
-    getColo123r() {
-      return this.seatPrices;
     },
   },
 };

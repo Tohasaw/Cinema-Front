@@ -18,7 +18,6 @@
             <div class="dropdown-content">
               <a @click="maxItems = 10" href="#">10</a>
               <a @click="maxItems = 20" href="#">20</a>
-              <a @click="maxItems = 50" href="#">50</a>
             </div>
           </div>
           <div class="button-create el" @click="createData()">
@@ -67,7 +66,7 @@
             </td>
           </tr>
           <tr v-for="index in blankRowsNumber()" :key="index">
-            <td>ㅤ</td><td></td><td></td><td></td><td></td><td></td><td></td>
+            <td>ㅤ</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
           </tr>
         </tbody>
       </table>

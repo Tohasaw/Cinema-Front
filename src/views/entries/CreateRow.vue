@@ -110,10 +110,10 @@ export default {
   methods: {
     submit() {
       this.errors = [];
-      if (!this.selectedMovie || !this.row.dateTime) {
+      if (!this.selectedMovie || !this.row.dateTime || !this.selectedPrice) {
         this.errors.push('Поля не заполнены ');
-      } else if (isNaN(parseInt(this.row.movieId))) {
-        this.errors.push('Поле "Длина" должно содержать целое число');
+      } else if (new Date(Date.parse(this.row.dateTime)) < new Date().setUTCHours(23, 59, 59, 999)) {
+        this.errors.push('Нельзя создать сеанс на текущую дату или раньше');
       }
       if (this.errors.length === 0) {
         let data = JSON.parse(JSON.stringify(this.row));
@@ -155,9 +155,12 @@ export default {
 }
 .back {
   display: flex;
-  padding: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   margin-top: 20px;
-  width: 1001px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.116);
+  border-radius: 8px;
 }
 .albumshow {
   margin-left: 350px;

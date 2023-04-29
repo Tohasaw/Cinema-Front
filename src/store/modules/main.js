@@ -73,8 +73,8 @@ export default {
     postTickets({ commit }, { data, router }) {
       axios.post('/api/main/tickets', data)
         .then(() => {
-          axios.get('/api/main/seatinfos', data)
-            .then((result) => commit('updateSeatInfos', result.data))
+          axios.get(`/api/main/seatprices/${data.tableEntryId}`)
+            .then((result) => commit('updateSeatPrices', result.data))
             .catch(console.error);
           router.push({ name: 'Home' });
         })
